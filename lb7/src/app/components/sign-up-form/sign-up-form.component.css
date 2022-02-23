@@ -1,0 +1,26 @@
+.text-input {
+  @apply appearance-none border border-gray-100 px-2 py-1 shadow-md text-blue-300
+  focus:outline-none
+}
+
+.error-text {
+  @apply px-2 text-red-500
+}
+
+.submit-button {
+  @apply font-semibold px-4 py-2 bg-green-500 text-white
+  hover:bg-red-700
+  disabled:opacity-50
+}
+
+.required-symbol {
+  @apply text-red-500
+}
+
+.form-card {
+  @apply p-2 max-w-max bg-gray-200
+}
+
+table tr * {
+  @apply py-1 px-2
+}

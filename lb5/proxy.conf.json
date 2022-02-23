@@ -1,0 +1,10 @@
+{
+    "/metaweather": {
+        "target": "https://www.metaweather.com/api/location/", 
+        "secure": true,
+        "pathRewrite": {
+            "^/metaweather": ""
+        },
+        "changeOrigin": true
+    }
+}

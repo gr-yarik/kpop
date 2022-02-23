@@ -1,0 +1,49 @@
+<div class="form-card">
+  <h3>Форма</h3>
+  <form>
+    <table>
+      <tr>
+        <td>Логин<span class="required-symbol">*</span>:</td>
+        <td><input class="text-input" (input)="formModel.login = getValue($event)"></td>
+        <td class="error-text" id="login-error" *ngIf="getLoginError()">{{getLoginError()}}</td>
+      </tr>
+      <tr>
+        <td>Пароль<span class="required-symbol">*</span>:</td>
+        <td><input class="text-input" type="password" (input)="formModel.password = getValue($event)"></td>
+        <td class="error-text" id="password-error" *ngIf="getPasswordError()">{{getPasswordError()}}</td>
+      </tr>
+      <tr>
+        <td>Пароль (подтверждение)<span class="required-symbol">*</span>:</td>
+        <td><input class="text-input" type="password" (input)="formModel.repeatedPassword = getValue($event)"></td>
+        <td class="error-text" id="repeat-password-error"
+            *ngIf="formModel.passwordIsNotEmpty() && getRepeatedPasswordError()">{{getRepeatedPasswordError()}}</td>
+      </tr>
+      <tr>
+        <td>Полное имя<span class="required-symbol">*</span>:</td>
+        <td><input class="text-input" (input)="formModel.fullName = getValue($event)"></td>
+        <td class="error-text" id="fullname-error" *ngIf="getFullNameError()">{{getFullNameError()}}</td>
+      </tr>
+      <tr>
+        <td>Email адрес<span class="required-symbol">*</span>:</td>
+        <td><input class="text-input" (input)="formModel.email = getValue($event)"></td>
+        <td class="error-text" id="email-error" *ngIf="getEmailError()">{{getEmailError()}}</td>
+      </tr>
+      <tr>
+        <td>Домашняя страница:</td>
+        <td><input class="text-input" (input)="formModel.homePage = getValue($event)"></td>
+        <td class="error-text" id="homepage-error" *ngIf="getHomePageError()">{{getHomePageError()}}</td>
+      </tr>
+      <tr>
+        <td>ICQ номер:</td>
+        <td><input class="text-input" (input)="formModel.ISQNumber = getValue($event)"></td>
+        <td class="error-text" id="icq-error" *ngIf="getPhoneError()">{{getPhoneError()}}</td>
+      </tr>
+      <tr>
+        <td>Skype ник:</td>
+        <td><input class="text-input" (input)="formModel.skype = getValue($event)"></td>
+        <td class="error-text" id="skype-error" *ngIf="getSkypeError()">{{getSkypeError()}}</td>
+      </tr>
+    </table>
+    <button class="submit-button" id="submit-button" [disabled]="!formModel.validate()" (click)="handleSubmit()">Продолжить</button>
+  </form>
+</div>

@@ -1,0 +1,77 @@
+<style>
+  table {
+  width: 80%;
+}
+
+.spinner-container{
+  width: 80%;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+</style>
+  <div>
+    <button mat-raised-button (click)="showChosen()">Selected</button>
+    <button mat-raised-button (click)="showAll()">All</button>
+    
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+      <!-- <mat-spinner></mat-spinner> -->
+      <mat-progress-bar mode="determinate" [value]="getProgress()"></mat-progress-bar>
+    </div>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+    
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef> Місто </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="humidity">
+        <th mat-header-cell *matHeaderCellDef> Опади </th>
+        <td mat-cell *matCellDef="let element"> {{element.consolidated_weather[0].humidity}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="temp">
+        <th mat-header-cell *matHeaderCellDef> Температура </th>
+        <td mat-cell *matCellDef="let element"> {{element.consolidated_weather[0].the_temp}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="wind_speed">
+        <th mat-header-cell *matHeaderCellDef> Швидкість вітру </th>
+        <td mat-cell *matCellDef="let element"> {{element.consolidated_weather[0].wind_speed}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row 
+      (click)="clickedRows.push(row);"
+      (click)="openDialog()"
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  
